@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/kenney_topdowntanksredux/PNG/Default size/shotThin.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/kenney_topdowntanksredux/PNG/Default size/shotLarge.png" type="Texture" id=2]
+[ext_resource path="res://MuzzleFlash.gd" type="Script" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 24.0
+} ]
+
+[node name="MuzzleFlash" type="Node2D"]
+light_mask = 2
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+rotation = -1.5708
+frames = SubResource( 1 )
+frame = 1
+playing = true
+offset = Vector2( 0, 13 )
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_animation_done"]

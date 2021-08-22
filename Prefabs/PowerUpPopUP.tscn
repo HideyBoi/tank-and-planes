@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://PowerUpPopUP.gd" type="Script" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "PowerUpDisplay"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Text:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1.2, 1.6 ),
+"transitions": PoolRealArray( 3.03143, 1, 4.28709, 3.97336 ),
+"update": 0,
+"values": [ Vector2( 457.893, -100 ), Vector2( 457.893, 100 ), Vector2( 457.893, 100 ), Vector2( 457.893, -100 ) ]
+}
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://Sprites/uipack_fixed/Font/kenvector_future.ttf"
+
+[sub_resource type="DynamicFont" id=3]
+size = 48
+font_data = SubResource( 2 )
+
+[node name="PowerUpPopUp" type="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -1024.0
+margin_right = 1024.0
+margin_bottom = 1200.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "PowerUpDisplay"
+anims/PowerUpDisplay = SubResource( 1 )
+
+[node name="Text" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -566.107
+margin_top = -100.0
+margin_right = 565.893
+margin_bottom = -18.9999
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[center]+1 max health!"
+text = "+1 max health!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/kenney_pixelshmup/Ships/ship_0002.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Enemy_Base.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 49.5867
+
+[node name="Enemy_02" type="Node2D"]
+light_mask = 2
+script = ExtResource( 3 )
+
+[node name="Enemy" type="Area2D" parent="." groups=[
+"Enemy",
+]]
+position = Vector2( 0, -2000 )
+script = ExtResource( 1 )
+health = 30
+score = 150
+speed = 680
+attack_dmg = 13
+
+[node name="Sprite" type="Sprite" parent="Enemy"]
+rotation = -3.14159
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+[node name="Coll" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource( 1 )
+
+[node name="ShootPoint" type="Node2D" parent="Enemy"]
+position = Vector2( 0, 34.9229 )
+
+[node name="Shoot" type="Timer" parent="Enemy"]
+wait_time = 0.3
+autostart = true
+
+[connection signal="area_entered" from="Enemy" to="Enemy" method="_on_hit"]
+[connection signal="timeout" from="Enemy/Shoot" to="Enemy" method="_on_Shoot"]
