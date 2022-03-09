@@ -14,22 +14,18 @@ var bullet = preload("res://Prefabs/Bullet.tscn")
 var muzzle_flash = preload("res://Prefabs/MuzzleFlash.tscn")
 var explosion = preload("res://Prefabs/Explosion.tscn")
 
+var is_touch = false
+var is_shoot = false
+
+var lookDir = Vector2(0, 0)
+
 func _process(_delta):
 	_process_rotation()
 	
 	Game_Master.player_health = health
 	
 	if Input.is_action_just_pressed("shoot"):
-		var bulletInst = bullet.instance()
-		bulletInst.position = shootPoint.global_position
-		bulletInst.rotation = barrel.rotation
-		bulletInst.damage = atk_dmg
-		level_root.add_child(bulletInst)
-		
-		var muzzle = muzzle_flash.instance()
-		muzzle.position = shootPoint.global_position
-		muzzle.rotation = barrel.rotation
-		level_root.add_child(muzzle)
+		shoot()
 	
 	if health <= 0:
 		var boom = explosion.instance()
@@ -41,9 +37,28 @@ func _process(_delta):
 		barrel.queue_free()
 		queue_free()
 
+func shoot():
+	var bulletInst = bullet.instance()
+	bulletInst.position = shootPoint.global_position
+	bulletInst.rotation = barrel.rotation
+	bulletInst.damage = atk_dmg
+	level_root.add_child(bulletInst)
+	
+	var muzzle = muzzle_flash.instance()
+	muzzle.position = shootPoint.global_position
+	muzzle.rotation = barrel.rotation
+	level_root.add_child(muzzle)
+
+func _input(event):
+	if event is InputEventScreenTouch and event.pressed == true:
+		print("touch")
+		is_shoot = true
+		
+		shoot()
+
 func _process_rotation():
-	var lookDir := Vector2()
-	lookDir = (get_global_mouse_position() - position)
+	if not is_touch:
+		lookDir = (get_global_mouse_position() - position)
 	
 	var desRot = lookDir.angle()
 	

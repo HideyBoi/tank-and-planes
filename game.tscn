@@ -38,6 +38,13 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = SubResource( 7 )
 
+[sub_resource type="DynamicFontData" id=11]
+font_path = "res://Sprites/uipack_fixed/Font/kenvector_future_thin.ttf"
+
+[sub_resource type="DynamicFont" id=12]
+size = 48
+font_data = SubResource( 11 )
+
 [sub_resource type="StyleBoxTexture" id=9]
 texture = ExtResource( 11 )
 region_rect = Rect2( 0, 0, 190, 49 )
@@ -53,13 +60,6 @@ margin_left = 6.14714
 margin_right = 6.14714
 margin_top = 6.14714
 margin_bottom = 6.14714
-
-[sub_resource type="DynamicFontData" id=11]
-font_path = "res://Sprites/uipack_fixed/Font/kenvector_future_thin.ttf"
-
-[sub_resource type="DynamicFont" id=12]
-size = 48
-font_data = SubResource( 11 )
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 8 )
@@ -125,8 +125,8 @@ anchor_right = 1.0
 margin_top = 56.0
 margin_right = -8.0
 margin_bottom = 120.0
-custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 8 )
 bbcode_enabled = true
 bbcode_text = "[center]Game Over"
 text = "Game Over"
@@ -143,10 +143,10 @@ margin_left = -128.0
 margin_top = -60.0
 margin_right = 128.0
 margin_bottom = 12.4414
+custom_fonts/font = SubResource( 12 )
 custom_styles/hover = SubResource( 9 )
 custom_styles/pressed = SubResource( 10 )
 custom_styles/normal = SubResource( 9 )
-custom_fonts/font = SubResource( 12 )
 text = "retry"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -161,10 +161,10 @@ margin_left = -128.0
 margin_top = 20.0
 margin_right = 128.0
 margin_bottom = 92.4414
+custom_fonts/font = SubResource( 12 )
 custom_styles/hover = SubResource( 9 )
 custom_styles/pressed = SubResource( 10 )
 custom_styles/normal = SubResource( 9 )
-custom_fonts/font = SubResource( 12 )
 text = "Menu"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -221,8 +221,9 @@ __meta__ = {
 [node name="Score" type="RichTextLabel" parent="UI Canvas/UI"]
 anchor_top = 1.0
 anchor_bottom = 1.0
+margin_left = 15.0
 margin_top = -64.0
-margin_right = 408.0
+margin_right = 423.0
 custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
 bbcode_text = "100"
@@ -234,8 +235,9 @@ __meta__ = {
 [node name="Highscore" type="RichTextLabel" parent="UI Canvas/UI"]
 anchor_top = 1.0
 anchor_bottom = 1.0
+margin_left = 15.0
 margin_top = -116.0
-margin_right = 512.0
+margin_right = 527.0
 margin_bottom = -52.0
 custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
@@ -253,9 +255,7 @@ script = ExtResource( 6 )
 stream = ExtResource( 20 )
 volume_db = -5.0
 
-[node name="Player" type="Area2D" parent="." groups=[
-"player",
-]]
+[node name="Player" type="Area2D" parent="." groups=["player"]]
 script = ExtResource( 3 )
 
 [node name="Coll" type="CollisionShape2D" parent="Player"]
